@@ -375,6 +375,14 @@
   // Banco de dados em tempo real
   const database = firebase.database();
 </script>
+    <script>
+  // Escreve um dado de teste
+  database.ref("testeFirebase").set({
+    nome: "Primeira gravação",
+    hora: new Date().toLocaleString()
+  });
+</script>
+
 
 </body>
 </html>
