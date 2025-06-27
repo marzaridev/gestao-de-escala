@@ -352,5 +352,29 @@
     </div>
 
     <script src="app.js"></script>
+    <!-- Firebase App (Compat) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+
+<!-- Firebase Realtime Database (Compat) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDQt9a1UjcYQZqYBMgWpGiR7X_IDb7ZQV4",
+    authDomain: "dashboard-fo.firebaseapp.com",
+    databaseURL: "https://dashboard-fo-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "dashboard-fo",
+    storageBucket: "dashboard-fo.firebasestorage.app",
+    messagingSenderId: "659597736856",
+    appId: "1:659597736856:web:b602f23726a755490949ed"
+  };
+
+  // Inicializar Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // Banco de dados em tempo real
+  const database = firebase.database();
+</script>
+
 </body>
 </html>
