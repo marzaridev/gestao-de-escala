@@ -1,3 +1,18 @@
+// Salva o array 'funcionarios' no localStorage
+function salvarFuncionariosNoStorage() {
+    localStorage.setItem('funcionarios', JSON.stringify(funcionarios));
+}
+
+// Carrega o array 'funcionarios' do localStorage
+function carregarFuncionariosDoStorage() {
+    const dados = localStorage.getItem('funcionarios');
+    if (dados) {
+        funcionarios = JSON.parse(dados);
+    } else {
+        funcionarios = [];  // Se não tiver dados, começa vazio
+    }
+}
+
 // Global application state
 let funcionarios = [
   {"nome": "Ana Silva", "turno": "9h-18h", "presente": true, "pausas": {"manha": {"realizada": false, "horario": "11:30"}, "almoco": {"realizada": false, "horario": "12:00"}, "tarde": {"realizada": false, "horario": "16:00"}}},
@@ -37,6 +52,24 @@ let configuracoes = {
 let coberturaChart = null;
 let coberturaRelatorioChart = null;
 let distribuicaoChart = null;
+
+window.onload = function() {
+    carregarFuncionariosDoStorage();  // carrega os dados do localStorage para a variável 'funcionarios'
+    atualizarInterface();              // atualiza o que está na tela com esses dados
+};
+
+function atualizarInterface() {
+    renderFuncionariosList();
+    renderPresencaList();
+    renderEscalaTable();
+    renderCronogramaPausas();
+    renderFuncionariosCadastrados();
+    updateDashboard();
+
+    if (coberturaChart) initializeDashboardChart();
+    if (distribuicaoChart) initializeDistribuicaoChart();
+}
+
 
 // Initialize application
 document.addEventListener('DOMContentLoaded', function() {
@@ -840,7 +873,25 @@ document.getElementById('adicionar-funcionario')?.addEventListener('click', func
     }
 });
 
+window.addEventListener('DOMContentLoaded', () => {
+    carregarFuncionariosDoStorage();
+
+    // Renderize as listas e gráficos com os dados carregados
+    renderFuncionariosList();
+    renderPresencaList();
+    renderEscalaTable();
+    renderCronogramaPausas();
+    renderFuncionariosCadastrados();
+    updateDashboard();
+
+    initializeDashboardChart();
+    initializeDistribuicaoChart();
+});
+
+
 // Remove funcionario functionality
 document.getElementById('remover-funcionario')?.addEventListener('click', function() {
     openRemoveEmployee();
+
+  
 });
